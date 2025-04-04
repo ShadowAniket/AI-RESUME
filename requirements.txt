@@ -1,0 +1,17 @@
+streamlit
+streamlit-option-menu
+python-docx
+pandas
+plotly
+pillow
+python-dotenv
+pdfminer.six
+nltk
+scikit-learn
+sqlalchemy
+openpyxl
+streamlit-lottie
+requests
+spacy
+PyPDF2
+python-dotenv
