@@ -1,6 +1,3 @@
-"""
-Smart Resume AI - Main Application
-"""
 import streamlit as st
 
 # Set page config at the very beginning
@@ -365,55 +362,6 @@ class ResumeApp:
             box-shadow: 0 5px 15px rgba(76,175,80,0.2);
         }
 
-        /* Progress Circle */
-        .progress-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 2rem auto;
-        }
-
-        .progress-circle {
-            transform: rotate(-90deg);
-            width: 100%;
-            height: 100%;
-        }
-
-        .progress-circle circle {
-            fill: none;
-            stroke-width: 8;
-            stroke-linecap: round;
-            stroke: #4CAF50;
-            transform-origin: 50% 50%;
-            transition: all 0.3s ease;
-        }
-
-        .progress-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: white;
-        }
-
-        /* Animations */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-slide-in {
-            animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .template-container {
@@ -437,19 +385,8 @@ class ResumeApp:
             }
         }
         </style>
-        """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-    def load_image(self, image_name):
-        """Load image from static directory"""
-        try:
-            image_path = f"c:/Users/shree/Downloads/smart-resume-ai/{image_name}"
-            with open(image_path, "rb") as f:
-                image_bytes = f.read()
-            encoded = base64.b64encode(image_bytes).decode()
-            return f"data:image/png;base64,{encoded}"
-        except Exception as e:
-            print(f"Error loading image {image_name}: {e}")
-            return None
 
     def export_to_excel(self):
         """Export resume data to Excel"""
@@ -485,8 +422,10 @@ class ResumeApp:
             conn.close()
 
     def render_dashboard(self):
-        """Render the dashboard page"""
+        """Render the dashboard page with improved contrast for text and background"""
+        st.markdown("<div style='background: #1E1E1E; color: #FFFFFF; padding: 20px; border-radius: 10px; margin: 20px 0;'>", unsafe_allow_html=True)
         self.dashboard_manager.render_dashboard()
+        st.markdown("</div>", unsafe_allow_html=True)
 
     def render_empty_state(self, icon, message):
         """Render an empty state with icon and message"""
@@ -857,13 +796,10 @@ class ResumeApp:
                 st.error(f"❌ Error preparing resume data: {str(e)}")
     
     def render_about(self):
-        """Render the about page"""
-        # Apply modern styles
+        """Render the about page with updated light theme"""
         from ui_components import apply_modern_styles
-        import base64
-        import os
+        import base64, os
         
-        # Function to load image as base64
         def get_image_as_base64(file_path):
             try:
                 with open(file_path, "rb") as image_file:
@@ -872,23 +808,23 @@ class ResumeApp:
             except:
                 return None
         
-        # Get image path and convert to base64
         image_path = os.path.join(os.path.dirname(__file__), "assets", "124852522.jpeg")
         image_base64 = get_image_as_base64(image_path)
         
         apply_modern_styles()
         
-        # Add Font Awesome icons and custom CSS
+        # Updated CSS: light backgrounds (#f7f7f7) with dark text (#333333)
         st.markdown("""
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
             <style>
                 .profile-section, .vision-section, .feature-card {
                     text-align: center;
                     padding: 2rem;
-                    background: rgba(45, 45, 45, 0.9);
-                    border-radius: 20px;
+                    background: #f7f7f7;
+                    border-radius: 10px;
                     margin: 2rem auto;
                     max-width: 800px;
+                    color: #333333;
                 }
                 
                 .profile-image {
@@ -898,18 +834,18 @@ class ResumeApp:
                     margin: 0 auto 1.5rem;
                     display: block;
                     object-fit: cover;
-                    border: 4px solid #4CAF50;
+                    border: 4px solid #0077b5;
                 }
                 
                 .profile-name {
                     font-size: 2.5rem;
-                    color: white;
+                    color: #333333;
                     margin-bottom: 0.5rem;
                 }
                 
                 .profile-title {
                     font-size: 1.2rem;
-                    color: #4CAF50;
+                    color: #0077b5;
                     margin-bottom: 1.5rem;
                 }
                 
@@ -922,11 +858,11 @@ class ResumeApp:
                 
                 .social-link {
                     font-size: 2rem;
-                    color: #4CAF50;
+                    color: #0077b5;
                     transition: all 0.3s ease;
                     padding: 0.5rem;
                     border-radius: 50%;
-                    background: rgba(76, 175, 80, 0.1);
+                    background: #e6f2fa;
                     width: 60px;
                     height: 60px;
                     display: flex;
@@ -937,13 +873,13 @@ class ResumeApp:
                 
                 .social-link:hover {
                     transform: translateY(-5px);
-                    background: #4CAF50;
+                    background: #0077b5;
                     color: white;
-                    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+                    box-shadow: 0 5px 15px rgba(0, 119, 181, 0.3);
                 }
                 
                 .bio-text {
-                    color: #ddd;
+                    color: #333333;
                     line-height: 1.8;
                     font-size: 1.1rem;
                     margin-top: 2rem;
@@ -951,7 +887,7 @@ class ResumeApp:
                 }
 
                 .vision-text {
-                    color: #ddd;
+                    color: #333333;
                     line-height: 1.8;
                     font-size: 1.1rem;
                     font-style: italic;
@@ -961,13 +897,13 @@ class ResumeApp:
 
                 .vision-icon {
                     font-size: 2.5rem;
-                    color: #4CAF50;
+                    color: #0077b5;
                     margin-bottom: 1rem;
                 }
 
                 .vision-title {
                     font-size: 2rem;
-                    color: white;
+                    color: #333333;
                     margin-bottom: 1rem;
                 }
 
@@ -982,35 +918,36 @@ class ResumeApp:
                 .feature-card {
                     padding: 2rem;
                     margin: 0;
+                    background: #f7f7f7;
+                    color: #333333;
                 }
 
                 .feature-icon {
                     font-size: 2.5rem;
-                    color: #4CAF50;
+                    color: #0077b5;
                     margin-bottom: 1rem;
                 }
 
                 .feature-title {
                     font-size: 1.5rem;
-                    color: white;
+                    color: #333333;
                     margin: 1rem 0;
                 }
 
                 .feature-description {
-                    color: #ddd;
+                    color: #333333;
                     line-height: 1.6;
                 }
             </style>
         """, unsafe_allow_html=True)
         
-        # Hero Section
         st.markdown("""
             <div class="hero-section">
                 <h1 class="hero-title">About Smart Resume AI</h1>
                 <p class="hero-subtitle">A powerful AI-driven platform for optimizing your resume</p>
             </div>
         """, unsafe_allow_html=True)
-        
+        # Profile Section
         
         # Vision Section
         st.markdown("""
@@ -1068,7 +1005,7 @@ class ResumeApp:
             "Get instant AI-powered feedback to optimize your resume"
         )
         
-        # Job Role Selection
+        # Job Role Selection (Updated to light background and dark text)
         categories = list(self.job_roles.keys())
         selected_category = st.selectbox("Job Category", categories)
         
@@ -1077,9 +1014,8 @@ class ResumeApp:
         
         role_info = self.job_roles[selected_category][selected_role]
         
-        # Display role information
         st.markdown(f"""
-        <div style='background-color: #1e1e1e; padding: 20px; border-radius: 10px; margin: 10px 0;'>
+        <div style='background-color: #ffffff; color: #333333; padding: 20px; border-radius: 10px; margin: 10px 0;'>
             <h3>{selected_role}</h3>
             <p>{role_info['description']}</p>
             <h4>Required Skills:</h4>
@@ -1254,7 +1190,7 @@ class ResumeApp:
                     # Contact Section
                     if analysis.get('contact_suggestions'):
                         st.markdown("""
-                        <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
+                        <div style='background-color: #ffffff; color: #333333; padding: 15px; border-radius: 10px; margin: 10px 0;'>
                             <h3 style='color: #4CAF50; margin-bottom: 10px;'>📞 Contact Information</h3>
                             <ul style='list-style-type: none; padding-left: 0;'>
                         """, unsafe_allow_html=True)
@@ -1265,7 +1201,7 @@ class ResumeApp:
                     # Summary Section
                     if analysis.get('summary_suggestions'):
                         st.markdown("""
-                        <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
+                        <div style='background-color: #ffffff; color: #333333; padding: 15px; border-radius: 10px; margin: 10px 0;'>
                             <h3 style='color: #4CAF50; margin-bottom: 10px;'>📝 Professional Summary</h3>
                             <ul style='list-style-type: none; padding-left: 0;'>
                         """, unsafe_allow_html=True)
@@ -1276,7 +1212,7 @@ class ResumeApp:
                     # Skills Section
                     if analysis.get('skills_suggestions') or analysis['keyword_match']['missing_skills']:
                         st.markdown("""
-                        <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
+                        <div style='background-color: #ffffff; color: #333333; padding: 15px; border-radius: 10px; margin: 10px 0;'>
                             <h3 style='color: #4CAF50; margin-bottom: 10px;'>🎯 Skills</h3>
                             <ul style='list-style-type: none; padding-left: 0;'>
                         """, unsafe_allow_html=True)
@@ -1291,7 +1227,7 @@ class ResumeApp:
                     # Experience Section
                     if analysis.get('experience_suggestions'):
                         st.markdown("""
-                        <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
+                        <div style='background-color: #ffffff; color: #333333; padding: 15px; border-radius: 10px; margin: 10px 0;'>
                             <h3 style='color: #4CAF50; margin-bottom: 10px;'>💼 Work Experience</h3>
                             <ul style='list-style-type: none; padding-left: 0;'>
                         """, unsafe_allow_html=True)
@@ -1302,7 +1238,7 @@ class ResumeApp:
                     # Education Section
                     if analysis.get('education_suggestions'):
                         st.markdown("""
-                        <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
+                        <div style='background-color: #ffffff; color: #333333; padding: 15px; border-radius: 10px; margin: 10px 0;'>
                             <h3 style='color: #4CAF50; margin-bottom: 10px;'>🎓 Education</h3>
                             <ul style='list-style-type: none; padding-left: 0;'>
                         """, unsafe_allow_html=True)
@@ -1313,7 +1249,7 @@ class ResumeApp:
                     # General Formatting Suggestions
                     if analysis.get('format_suggestions'):
                         st.markdown("""
-                        <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
+                        <div style='background-color: #ffffff; color: #333333; padding: 15px; border-radius: 10px; margin: 10px 0;'>
                             <h3 style='color: #4CAF50; margin-bottom: 10px;'>📄 Formatting</h3>
                             <ul style='list-style-type: none; padding-left: 0;'>
                         """, unsafe_allow_html=True)
@@ -1342,7 +1278,7 @@ class ResumeApp:
                 for i, course in enumerate(courses[:6]):  # Show top 6 courses
                     with cols[i % 2]:
                         st.markdown(f"""
-                        <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
+                        <div style='background-color: #ffffff; color: #333333; padding: 15px; border-radius: 10px; margin: 10px 0;'>
                             <h4>{course[0]}</h4>
                             <a href='{course[1]}' target='_blank'>View Course</a>
                         </div>

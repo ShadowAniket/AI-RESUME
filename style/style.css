@@ -4,14 +4,14 @@
 /* Root Variables */
 :root {
     --primary-gradient: linear-gradient(135deg, #00B4DB 0%, #0083B0 100%);
-    --secondary-gradient: linear-gradient(135deg, #2D2D2D 0%, #1E1E1E 100%);
+    --secondary-gradient: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
     --accent-color: #00B4DB;
-    --bg-dark: #1E1E1E;
-    --bg-darker: #171717;
-    --bg-light: #2D2D2D;
-    --text-primary: #E0E0E0;
-    --text-secondary: #B0B0B0;
-    --border-color: #3D3D3D;
+    --bg-dark: #ffffff;
+    --bg-darker: #ffffff;
+    --bg-light: #ffffff;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --border-color: #ccc;
     --success-color: #4CAF50;
     --warning-color: #FFA726;
     --error-color: #F44336;
@@ -20,13 +20,19 @@
 /* Global Styles */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-darker);
+    background-color: var(--bg-light);
     color: var(--text-primary);
     line-height: 1.6;
 }
 
+body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: sans-serif;
+}
+
 .stApp {
-    background: var(--bg-darker);
+    background: var(--bg-light);
 }
 
 /* Main container */
@@ -40,17 +46,17 @@ body {
 
 /* Global Dark Theme Styles */
 body {
-    background-color: var(--bg-darker);
+    background-color: var(--bg-light);
     color: var(--text-primary);
 }
 
 .stApp {
-    background: var(--bg-darker);
+    background: var(--bg-light);
 }
 
 /* Sidebar Styling */
 .css-1d391kg {
-    background: linear-gradient(180deg, #2D2D2D 0%, #1E1E1E 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
 }
 
 .css-1d391kg .stSelectbox label {
@@ -1593,4 +1599,18 @@ h1 {
 
 .feedback-container::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #45a049, #1e88e5);
+}
+
+.page-header {
+    background-color: #f0f0f0;
+    color: #000000;
+    padding: 1rem;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.card.feature-card {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

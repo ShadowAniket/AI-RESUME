@@ -59,7 +59,7 @@ def render_company_section():
             padding: 1rem 0;
         }
         .company-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: #ffffff; /* changed to white */
             border-radius: 10px;
             padding: 1rem;
             transition: transform 0.2s;
@@ -67,7 +67,7 @@ def render_company_section():
         }
         .company-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
+            background: #f0f0f0;
         }
         .company-header {
             display: flex;
@@ -85,10 +85,11 @@ def render_company_section():
             margin-top: 0.5rem;
         }
         .company-category {
-            background: rgba(255, 255, 255, 0.1);
+            background: #e0e0e0;
             padding: 0.2rem 0.5rem;
             border-radius: 15px;
             font-size: 0.8rem;
+            color: #000;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -135,15 +136,16 @@ def render_market_insights():
             padding: 1rem 0;
         }
         .insight-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: #ffffff;
             border-radius: 10px;
             padding: 1rem;
             text-align: center;
             transition: transform 0.3s ease, background 0.3s ease;
+            color: #000;
         }
         .insight-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
+            background: #f0f0f0;
         }
         .insight-icon {
             font-size: 2rem;
@@ -151,20 +153,21 @@ def render_market_insights():
             color: #00bfa5;
         }
         .growth-text {
-            color: #00c853;
+            color: #009688;
             font-weight: bold;
         }
         .salary-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: #ffffff;
             border-radius: 15px;
             padding: 1.5rem;
             margin-bottom: 1rem;
             transition: all 0.3s ease;
             border-left: 4px solid #00bfa5;
+            color: #000;
         }
         .salary-card:hover {
             transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.08);
+            background: #f0f0f0;
         }
         .salary-header {
             display: flex;

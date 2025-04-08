@@ -78,17 +78,16 @@ class FeedbackManager:
             @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
             
             .feedback-container {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
+                background: #ffffff;
                 padding: 30px;
                 border-radius: 20px;
                 margin: 20px 0;
-                border: 1px solid rgba(255, 255, 255, 0.1);
+                border: 1px solid #ccc;
                 box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             }
             
             .feedback-header {
-                color: #E0E0E0;
+                color: #000;
                 font-size: 1.5em;
                 font-weight: 600;
                 margin-bottom: 25px;
@@ -103,8 +102,8 @@ class FeedbackManager:
                 margin: 20px 0;
                 padding: 20px;
                 border-radius: 15px;
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: #f7f7f7;
+                border: 1px solid #ccc;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
             
@@ -114,7 +113,7 @@ class FeedbackManager:
             }
             
             .feedback-label {
-                color: #E0E0E0;
+                color: #000;
                 font-size: 1.1em;
                 font-weight: 500;
                 margin-bottom: 10px;
@@ -140,7 +139,7 @@ class FeedbackManager:
             
             .submit-button {
                 background: linear-gradient(135deg, #4CAF50, #2196F3);
-                color: white;
+                color: #000;
                 padding: 12px 25px;
                 border: none;
                 border-radius: 8px;
@@ -159,8 +158,8 @@ class FeedbackManager:
             }
             
             .textarea-container {
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: #f7f7f7;
+                border: 1px solid #ccc;
                 border-radius: 8px;
                 padding: 10px;
                 margin-top: 10px;
@@ -171,7 +170,7 @@ class FeedbackManager:
                 min-height: 100px;
                 background: transparent;
                 border: none;
-                color: #E0E0E0;
+                color: #000;
                 font-size: 1em;
                 resize: vertical;
             }

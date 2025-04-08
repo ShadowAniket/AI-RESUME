@@ -20,10 +20,10 @@ class DashboardManager:
             'info': '#00BCD4',
             'success': '#66BB6A',
             'purple': '#9C27B0',
-            'background': '#1E1E1E',
-            'card': '#2D2D2D',
-            'text': '#FFFFFF',
-            'subtext': '#B0B0B0'
+            'background': '#f5f5f5',       # changed to light background
+            'card': '#ffffff',             # changed to white card background
+            'text': '#000000',             # dark text
+            'subtext': '#555555'           # darker subtext
         }
         
     def apply_dashboard_style(self):
@@ -613,18 +613,17 @@ class DashboardManager:
 
     def render_dashboard(self):
         """Main dashboard rendering function"""
-        # Apply styling
         st.markdown("""
             <style>
                 .dashboard-container {
-                    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+                    background: #ffffff;
                     padding: 2rem;
                     border-radius: 20px;
                     margin: -1rem -1rem 2rem -1rem;
                     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
                 }
                 .dashboard-title {
-                    color: #4FD1C5;
+                    color: #000000;
                     font-size: 2.5rem;
                     margin-bottom: 0.5rem;
                     display: flex;
@@ -632,7 +631,7 @@ class DashboardManager:
                     gap: 1rem;
                 }
                 .dashboard-icon {
-                    background: rgba(79, 209, 197, 0.2);
+                    background: rgba(0, 0, 0, 0.05);
                     padding: 0.5rem;
                     border-radius: 12px;
                 }
@@ -643,52 +642,25 @@ class DashboardManager:
                     margin-top: 2rem;
                 }
                 .stat-card {
-                    background: rgba(255, 255, 255, 0.05);
-                    backdrop-filter: blur(10px);
+                    background: #ffffff;
                     padding: 1.5rem;
                     border-radius: 16px;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(0, 0, 0, 0.1);
                     transition: all 0.3s ease;
                 }
                 .stat-card:hover {
                     transform: translateY(-5px);
-                    background: rgba(255, 255, 255, 0.1);
+                    background: #f0f0f0;
                 }
                 .stat-value {
                     font-size: 2.5rem;
                     font-weight: bold;
                     margin: 0;
-                    color: #4FD1C5;
+                    color: #4CAF50;
                 }
                 .stat-label {
                     font-size: 1rem;
-                    color: rgba(255, 255, 255, 0.7);
-                    margin: 0.5rem 0 0 0;
-                }
-                .section-title {
-                    color: #4FD1C5;
-                    font-size: 1.5rem;
-                    margin: 1rem 0 0.5rem 0;
-                    padding-bottom: 0.5rem;
-                    border-bottom: 2px solid rgba(79, 209, 197, 0.2);
-                }
-                .chart-container {
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 16px;
-                    padding: 1rem;
-                    margin-bottom: 1rem;
-                }
-                .insights-grid {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 1.5rem;
-                    margin-top: 1rem;
-                }
-                .insight-card {
-                    background: rgba(255, 255, 255, 0.05);
-                    padding: 1.5rem;
-                    border-radius: 16px;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    color: #555555;
                 }
                 .trend-indicator {
                     display: inline-flex;
@@ -699,26 +671,18 @@ class DashboardManager:
                     margin-left: 0.5rem;
                 }
                 .trend-up {
-                    background: rgba(46, 204, 113, 0.2);
-                    color: #2ecc71;
+                    background: rgba(76, 175, 80, 0.2);
+                    color: #2e7d32;
                 }
                 .trend-down {
-                    background: rgba(231, 76, 60, 0.2);
-                    color: #e74c3c;
+                    background: rgba(244, 67, 54, 0.2);
+                    color: #c62828;
                 }
                 @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
                 }
-                .animate-fade-in {
-                    animation: fadeInUp 0.5s ease-out forwards;
-                }
+                .animate-fade-in { animation: fadeInUp 0.5s ease-out forwards; }
             </style>
         """, unsafe_allow_html=True)
 
@@ -912,7 +876,7 @@ class DashboardManager:
             LIMIT 1
         """)
         top_category = cursor.fetchone()
-        if top_category:
+        if (top_category):
             insights.append({
                 'title': 'Top Performing Category',
                 'icon': '🏆',
