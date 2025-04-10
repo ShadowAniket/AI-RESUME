@@ -51,7 +51,7 @@ A powerful AI-driven platform for optimizing resumes and advancing careers, buil
 
 1. Clone the repository
 ```bash
-git clone <repository-url>
+git clone <[repository-url](https://github.com/ShadowAniket/AI-RESUME.git)>
 cd AI-RESUME
 ```
 
