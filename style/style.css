@@ -3,36 +3,40 @@
 
 /* Root Variables */
 :root {
-    --primary-gradient: linear-gradient(135deg, #00B4DB 0%, #0083B0 100%);
-    --secondary-gradient: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-    --accent-color: #00B4DB;
+    --primary-gradient: linear-gradient(135deg, #006994 0%, #0099CC 100%);
+    --secondary-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    --accent-color: #006994;
     --bg-dark: #ffffff;
-    --bg-darker: #ffffff;
-    --bg-light: #ffffff;
-    --text-primary: #000000;
-    --text-secondary: #333333;
-    --border-color: #ccc;
-    --success-color: #4CAF50;
-    --warning-color: #FFA726;
-    --error-color: #F44336;
+    --bg-darker: #f8f9fa;
+    --bg-light: #e9ecef;
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --border-color: #ced4da;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --error-color: #dc3545;
+    --accent-color-dark: #005577;
+    --card-bg: #ffffff;
+    --card-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --hover-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    --input-bg: #ffffff;
+    --textarea-bg: #ffffff;
+    --dark-element-text: #ffffff;
+    --light-element-text: #212529;
 }
 
 /* Global Styles */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-light);
+    background-color: var(--bg-darker);
     color: var(--text-primary);
     line-height: 1.6;
-}
-
-body {
-    background-color: #ffffff;
-    color: #000000;
-    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 .stApp {
-    background: var(--bg-light);
+    background: var(--bg-darker);
+    color: var(--text-primary);
 }
 
 /* Main container */
@@ -44,23 +48,152 @@ body {
     color: var(--text-primary);
 }
 
-/* Global Dark Theme Styles */
+/* Global Light Theme Styles */
 body {
-    background-color: var(--bg-light);
+    background-color: var(--bg-darker);
     color: var(--text-primary);
 }
 
 .stApp {
-    background: var(--bg-light);
+    background: var(--bg-darker);
 }
 
 /* Sidebar Styling */
-.css-1d391kg {
-    background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+.css-1d391kg, [data-testid="stSidebarNav"] {
+    background: linear-gradient(180deg, #2c3e50 0%, #3498db 100%) !important;
+    padding: 1rem;
 }
 
 .css-1d391kg .stSelectbox label {
-    color: var(--text-primary) !important;
+    color: white !important;
+}
+
+/* Sidebar Styling - Updated Emotion Cache Selectors */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #2c3e50 0%, #3498db 100%) !important;
+    padding: 1rem;
+}
+
+/* Sidebar title styling */
+[data-testid="stSidebar"] .st-emotion-cache-16idsys p,
+[data-testid="stSidebar"] .st-emotion-cache-16idsys span,
+[data-testid="stSidebar"] .st-emotion-cache-ue6h4q,
+[data-testid="stSidebar"] .st-emotion-cache-pkbazv {
+    color: white !important;
+    font-weight: 500;
+}
+
+/* Sidebar button styling */
+[data-testid="stSidebar"] .st-emotion-cache-16idsys button,
+[data-testid="stSidebar"] .st-emotion-cache-7ym5gk {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 0.5rem 0 !important;
+    width: 100% !important;
+    text-align: left !important;
+}
+
+[data-testid="stSidebar"] .st-emotion-cache-16idsys button:hover,
+[data-testid="stSidebar"] .st-emotion-cache-7ym5gk:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateX(5px);
+}
+
+/* Sidebar text and headings */
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] .st-emotion-cache-10trblm,
+[data-testid="stSidebar"] .st-emotion-cache-1629p8f {
+    color: white !important;
+}
+
+/* Sidebar Button Styling */
+.css-1d391kg button,
+div[data-testid="stSidebarNav"] button {
+    width: 100%;
+    padding: 0.75rem 1rem !important;
+    border: none !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 0.5rem 0 !important;
+    text-align: left !important;
+}
+
+.css-1d391kg button:hover,
+div[data-testid="stSidebarNav"] button:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateX(5px);
+}
+
+/* Sidebar Navigation Specific Styles */
+div[data-testid="stSidebarNav"] {
+    background: transparent !important;
+}
+
+div[data-testid="stSidebarNav"] button p {
+    color: white !important;
+    font-weight: 500 !important;
+}
+
+/* Ensure sidebar text is visible */
+.css-1d391kg .st-emotion-cache-ue6h4q,
+[data-testid="stSidebarNav"] .st-emotion-cache-ue6h4q,
+.css-1d391kg .st-emotion-cache-eczf16,
+[data-testid="stSidebarNav"] .st-emotion-cache-eczf16,
+.css-1d391kg h1,
+[data-testid="stSidebarNav"] h1,
+.css-1d391kg p,
+[data-testid="stSidebarNav"] p {
+    color: white !important;
+}
+
+/* Style the sidebar title specifically */
+[data-testid="stSidebarNav"] .st-emotion-cache-18ni7ap {
+    color: white !important;
+    font-weight: 600;
+}
+
+/* Sidebar Button Styling - More specific selectors */
+[data-testid="stSidebar"] .st-emotion-cache-16idsys button,
+[data-testid="stSidebar"] .st-emotion-cache-16idsys button p,
+[data-testid="stSidebar"] .st-emotion-cache-16idsys button span,
+[data-testid="stSidebar"] button,
+[data-testid="stSidebar"] button p,
+[data-testid="stSidebar"] button span {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 0.5rem 0 !important;
+    width: 100% !important;
+    text-align: left !important;
+}
+
+[data-testid="stSidebar"] button:hover,
+[data-testid="stSidebar"] button:active,
+[data-testid="stSidebar"] button:focus {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateX(5px);
+    color: white !important;
+}
+
+/* Additional specificity for hero section pages */
+.hero-section ~ [data-testid="stSidebar"] button,
+.hero-section ~ [data-testid="stSidebar"] button p,
+.hero-section ~ [data-testid="stSidebar"] button span {
+    color: white !important;
 }
 
 /* Card Styling */
@@ -68,10 +201,11 @@ body {
     background: var(--bg-dark);
     border-radius: 15px;
     padding: 2rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--border-color);
     margin-bottom: 1.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: var(--text-primary);
 }
 
 .stCard:hover {
@@ -80,26 +214,35 @@ body {
 }
 
 /* Button Styling */
-.stButton > button {
-    background: var(--primary-gradient);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.stButton > button,
+.st-emotion-cache-1vbkxwb p {
+    background: var(--primary-gradient) !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 4px rgba(0, 105, 148, 0.2) !important;
+    text-transform: none !important;
+    letter-spacing: 0.5px !important;
+    line-height: 1.4 !important;
 }
 
 .stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 180, 219, 0.4);
+    background: linear-gradient(135deg, #005577 0%, #0088B5 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0, 105, 148, 0.3) !important;
+}
+
+.stButton > button:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 4px rgba(0, 105, 148, 0.2) !important;
 }
 
 /* Input Fields */
 .stTextInput > div > div {
-    background: var(--bg-light);
+    background: var(--input-bg);
     border: 1px solid var(--border-color);
     color: var(--text-primary);
     border-radius: 8px;
@@ -113,7 +256,7 @@ body {
 
 /* Streamlit Text Input Base Styles */
 .stTextInput > div > div {
-    background: var(--bg-light);
+    background: var(--input-bg);
     border: 1px solid var(--border-color);
     color: var(--text-primary);
     border-radius: 8px;
@@ -123,6 +266,24 @@ body {
 .stTextInput > div > div:focus-within {
     border-color: var(--accent-color);
     box-shadow: 0 0 0 1px var(--accent-color);
+}
+
+/* Text Area Styling */
+.stTextArea > div > div {
+    background: var(--textarea-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 8px;
+}
+
+.stTextArea > div > div:focus-within {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 1px var(--accent-color);
+}
+
+.stTextArea textarea {
+    color: var(--text-primary);
+    background: transparent;
 }
 
 /* Streamlit Password Input Styles */
@@ -135,7 +296,7 @@ div[data-baseweb="base-input"] {
 
 div[data-baseweb="input"] {
     position: relative !important;
-    background: var(--bg-light) !important;
+    background: var(--input-bg) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: 8px !important;
     margin: 8px 0 !important;
@@ -152,6 +313,25 @@ div[data-baseweb="input"] input {
     width: 100% !important;
     box-sizing: border-box !important;
     outline: none !important;
+}
+
+/* Textarea styling for better visibility */
+textarea {
+    background-color: var(--textarea-bg) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    width: 100% !important;
+    min-height: 100px !important;
+}
+
+/* Ensure text is visible in dark-themed textareas */
+.stTextArea textarea {
+    background-color: var(--textarea-bg) !important;
+    color: var(--text-primary) !important;
 }
 
 /* Remove all focus outlines */
@@ -208,11 +388,12 @@ div[data-baseweb="input"] > div {
 
 /* Admin Login Section */
 .stExpander {
-    background: var(--bg-dark);
+    background: white;
     border-radius: 12px;
     border: 1px solid var(--border-color);
     margin: 10px 0;
     padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .stExpander .stButton > button {
@@ -234,7 +415,7 @@ div[data-baseweb="input"] > div {
 
 /* File Uploader */
 .stFileUploader {
-    background: var(--bg-light);
+    background: white;
     border: 2px dashed var(--border-color);
     border-radius: 10px;
     padding: 2rem;
@@ -250,10 +431,21 @@ div[data-baseweb="input"] > div {
     padding: 1rem;
     border-radius: 10px;
     border-left: 4px solid var(--accent-color);
+    color: var(--text-primary);
 }
 
 .stMetric:hover {
     transform: translateX(5px);
+}
+
+/* Ensure metric values are visible */
+[data-testid="stMetricValue"] {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--text-secondary) !important;
 }
 
 /* Headers */
@@ -264,9 +456,7 @@ h1, h2, h3 {
 }
 
 h1 {
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--accent-color);
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
 }
@@ -278,14 +468,15 @@ h1 {
 
 /* Expander */
 .streamlit-expanderHeader {
-    background: var(--bg-light);
+    background: #f5f5f5;
     border: none;
     border-radius: 8px;
+    color: var(--text-primary);
 }
 
 /* Plotly Charts */
 .js-plotly-plot {
-    background: var(--bg-dark) !important;
+    background: white !important;
 }
 
 /* Custom Components */
@@ -296,6 +487,7 @@ h1 {
     margin: 1rem 0;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
+    color: var(--text-primary);
 }
 
 .feature-card:hover {
@@ -304,8 +496,17 @@ h1 {
     border-color: var(--accent-color);
 }
 
+.feature-card h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+}
+
 .resume-template {
-    background: var(--bg-light);
+    background: white;
     border-radius: 10px;
     padding: 1rem;
     margin: 0.5rem;
@@ -326,6 +527,7 @@ h1 {
     margin: 1rem 0;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
+    color: var(--text-primary);
 }
 
 .feedback-card:hover {
@@ -333,9 +535,115 @@ h1 {
     border-color: var(--accent-color);
 }
 
+/* Code editor and text areas */
+.stCodeEditor > div {
+    background-color: var(--bg-light) !important;
+}
+
+.stCodeEditor textarea, .stCodeEditor pre {
+    background-color: var(--textarea-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Ensure text is visible in all text inputs */
+.stTextInput input, .stTextArea textarea, .stSelectbox select {
+    color: var(--text-primary) !important;
+    background-color: var(--input-bg) !important;
+}
+
+/* Feedback Rating Slider */
+div[data-baseweb="slider"] {
+    margin: 2rem 0;
+}
+
+div[data-baseweb="slider"] div[role="slider"] {
+    background: #006994 !important;
+    border: 2px solid #006994 !important;
+    cursor: pointer !important;
+}
+
+/* Track styles */
+div[data-baseweb="slider"] [data-testid="stSliderBase"] {
+    background: #f0f0f0 !important;
+}
+
+/* Slider track before the thumb */
+div[class*="Track"] {
+    background: #e0e0e0 !important;
+    height: 4px !important;
+}
+
+div[class*="Track"]::before {
+    background: #f8f9fa !important;
+}
+
+/* Feedback text color and contrast improvements */
+.feedback-header h1 {
+    color: #333333 !important;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: none;
+}
+
+.feedback-overview-title {
+    color: #212529 !important;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* Slider Numbers/Labels */
+div[data-baseweb="slider"] .st-emotion-cache-1vbkxwb,
+div[data-baseweb="slider"] .st-emotion-cache-1xw8zd0,
+div[data-baseweb="slider"] .st-emotion-cache-10y5sf6,
+div[data-testid="stTickBarMin"],
+div[data-testid="stTickBarMax"] {
+    color: var(--text-primary) !important;
+    background: transparent !important;
+    font-weight: 500 !important;
+}
+
+/* Feedback Overview Text */
+.st-emotion-cache-10trblm {
+    color: #212529 !important;
+    font-weight: 600 !important;
+    font-size: 1.8rem !important;
+}
+
+/* Your Voice Matters Text */
+.feedback-header h1 {
+    color: var(--text-primary) !important;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: none;
+}
+
+/* Slider Bar Min and Max Numbers */
+.st-emotion-cache-1inwz65 {
+    color: #f8f9fa !important;
+    background: transparent !important;
+    font-weight: 500 !important;
+}
+
+/* Slider Track */
+.st-emotion-cache-1vbkxwb {
+    background: linear-gradient(135deg, #006994 0%, #0099CC 100%) !important;
+}
+
+/* Slider Thumb */
+.st-emotion-cache-1xw8zd0 {
+    background: #006994 !important;
+    border: 2px solid #006994 !important;
+}
+
+/* Slider Active Track */
+.st-emotion-cache-10y5sf6 {
+    background: linear-gradient(135deg, #006994 0%, #0099CC 100%) !important;
+}
+
 /* About Section */
 .about-container {
-    background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-dark) 100%);
+    background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%);
     border-radius: 20px;
     padding: 2rem;
     margin: 2rem 0;
@@ -369,12 +677,43 @@ h1 {
     height: 8px;
 }
 
+/* Additional text visibility improvements */
+/* Ensure text is visible in all components */
+.stMarkdown, .stMarkdown p, .stMarkdown li, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    color: var(--text-primary) !important;
+}
+
+/* Ensure text is visible in selectboxes */
+.stSelectbox label, .stMultiselect label {
+    color: var(--text-primary) !important;
+}
+
+/* Ensure text is visible in radio buttons and checkboxes */
+.stRadio label, .stCheckbox label {
+    color: var(--text-primary) !important;
+}
+
+/* Ensure text is visible in sliders */
+.stSlider label {
+    color: var(--text-primary) !important;
+}
+
+/* Ensure text is visible in date inputs */
+.stDateInput label {
+    color: var(--text-primary) !important;
+}
+
+/* Ensure text is visible in number inputs */
+.stNumberInput label {
+    color: var(--text-primary) !important;
+}
+
 ::-webkit-scrollbar-track {
-    background: var(--bg-darker);
+    background: #f0f0f0;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--border-color);
+    background: #cccccc;
     border-radius: 4px;
 }
 
@@ -404,8 +743,9 @@ h1 {
     border-radius: 10px;
     padding: 1.5rem;
     margin-bottom: 1rem;
-    border: 1px solid #e1e4e8;
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .role-card:hover {
@@ -414,15 +754,16 @@ h1 {
 }
 
 .role-card h3 {
-    color: #2193b0;
+    color: var(--accent-color);
     margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 /* Skills tag styling */
 .skill-tag {
     display: inline-block;
-    background: rgba(33, 147, 176, 0.1);
-    color: #2193b0;
+    background: rgba(0, 131, 176, 0.1);
+    color: var(--accent-color);
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     margin: 0.25rem;
@@ -431,36 +772,35 @@ h1 {
 
 /* Template preview styling */
 .template-preview {
-    border: 2px solid #e1e4e8;
+    border: 2px solid var(--border-color);
     border-radius: 10px;
     padding: 1rem;
     margin-bottom: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    background: white;
 }
 
 .template-preview:hover {
-    border-color: #2193b0;
-    box-shadow: 0 2px 8px rgba(33, 147, 176, 0.2);
+    border-color: var(--accent-color);
+    box-shadow: 0 2px 8px rgba(0, 131, 176, 0.2);
 }
 
 .template-preview.selected {
-    border-color: #2193b0;
-    background: rgba(33, 147, 176, 0.05);
+    border-color: var(--accent-color);
+    background: rgba(0, 131, 176, 0.05);
 }
 
 /* Section headings */
 h1, h2, h3 {
-    color: #1a1a1a;
+    color: var(--text-primary);
     margin-bottom: 1rem;
 }
 
 h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    background: linear-gradient(45deg, #2193b0, #6dd5ed);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--accent-color);
 }
 
 /* Responsive adjustments */
@@ -480,18 +820,19 @@ h1 {
 
 /* Glass morphism effects */
 .glass-card {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 /* Enhanced feedback section */
 .feedback-container {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 .feedback-card {
@@ -507,13 +848,144 @@ h1 {
     transform: scale(1.02);
 }
 
+/* Feedback Section Styling */
+.feedback-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Feedback Header */
+.feedback-header {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #006994 0%, #0099CC 100%);
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 105, 148, 0.2);
+}
+
+.feedback-header h1 {
+    color: #ffffff !important;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-header p {
+    color: #e0f7fa !important;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Feedback Overview Title */
+.feedback-overview-title {
+    color: #333333 !important;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(0, 105, 148, 0.2);
+}
+
+/* Rating Slider */
+div[data-baseweb="slider"] {
+    margin: 2.5rem 0;
+}
+
+/* Slider track */
+div[data-baseweb="slider"] [data-testid="stSliderBase"] {
+    background: #f0f0f0 !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+}
+
+/* Slider thumb */
+div[data-baseweb="slider"] div[role="slider"] {
+    background: #006994 !important;
+    border: 3px solid #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 105, 148, 0.3) !important;
+    width: 24px !important;
+    height: 24px !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease !important;
+}
+
+div[data-baseweb="slider"] div[role="slider"]:hover {
+    transform: scale(1.1) !important;
+}
+
+/* Slider filled track */
+div[data-baseweb="slider"] div[class*="Track"] {
+    background: linear-gradient(90deg, #006994, #0099CC) !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+}
+
+/* Slider numbers/labels */
+div[data-testid="stTickBarMin"],
+div[data-testid="stTickBarMax"] {
+    color: #333333 !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    padding: 0.5rem 0 !important;
+}
+
+/* Feedback Form Container */
+.feedback-form-container {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Text Area */
+.stTextArea textarea {
+    background: #ffffff !important;
+    border: 2px solid rgba(0, 105, 148, 0.2) !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.stTextArea textarea:focus {
+    border-color: #006994 !important;
+    box-shadow: 0 0 0 2px rgba(0, 105, 148, 0.1) !important;
+}
+
+/* Submit Button */
+.stButton > button {
+    background: linear-gradient(135deg, #006994 0%, #0099CC 100%) !important;
+    color: white !important;
+    padding: 0.8rem 2rem !important;
+    border-radius: 50px !important;
+    border: none !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 105, 148, 0.2) !important;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 105, 148, 0.3) !important;
+}
+
 /* About page enhancements */
 .about-section {
     position: relative;
     padding: 3rem;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
     border-radius: 20px;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .about-section::before {
@@ -550,6 +1022,7 @@ h1 {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--border-color);
 }
 
 .template-card:hover {
@@ -564,7 +1037,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    background: linear-gradient(45deg, #0083B0, #00B4DB);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -588,7 +1061,7 @@ h1 {
     margin: 1rem 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    border-left: 4px solid #2193b0;
+    border-left: 4px solid var(--accent-color);
 }
 
 .metric-card:hover {
@@ -600,9 +1073,9 @@ h1 {
 .loading-spinner {
     width: 50px;
     height: 50px;
-    border: 3px solid rgba(33, 147, 176, 0.1);
+    border: 3px solid rgba(0, 131, 176, 0.1);
     border-radius: 50%;
-    border-top-color: #2193b0;
+    border-top-color: var(--accent-color);
     animation: spin 1s ease-in-out infinite;
 }
 
@@ -1089,46 +1562,10 @@ h1 {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.hero-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg,
-        rgba(0, 180, 219, 0.2) 0%,
-        rgba(0, 131, 176, 0.1) 25%,
-        rgba(0, 180, 219, 0.2) 50%,
-        rgba(0, 131, 176, 0.1) 75%,
-        rgba(0, 180, 219, 0.2) 100%
-    );
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
-    z-index: 0;
-}
-
-.hero-header .header-title {
-    position: relative;
-    font-size: 3.5rem;
-    font-weight: 700;
-    background: linear-gradient(45deg, #00b4db, #0083b0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1.5rem;
-    z-index: 1;
-    animation: fadeInUp 0.8s ease;
-}
-
+.hero-header .header-title,
 .hero-header .header-subtitle {
-    position: relative;
-    font-size: 1.8rem;
-    color: var(--text-primary);
-    line-height: 1.4;
-    max-width: 800px;
-    margin: 0 auto;
-    z-index: 1;
-    animation: fadeInUp 1s ease;
+    color: #333333 !important;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
 }
 
 /* Feedback Section Styles */
@@ -1601,16 +2038,50 @@ h1 {
     background: linear-gradient(135deg, #45a049, #1e88e5);
 }
 
-.page-header {
-    background-color: #f0f0f0;
-    color: #000000;
-    padding: 1rem;
-    border-bottom: 1px solid #d0d0d0;
+/* Hero Section Styles */
+.hero-section {
+    position: relative;
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.card.feature-card {
-    background-color: #ffffff;
-    color: #000000;
-    border: 1px solid #d0d0d0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.hero-section .hero-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #000000 !important;
+    margin-bottom: 1rem;
+    text-shadow: none;
+    font-family: 'Poppins', sans-serif;
+    -webkit-text-fill-color: #000000 !important;
+    background: none !important;
+}
+
+.hero-section .hero-subtitle {
+    font-size: 1.4rem;
+    color: #4a4a4a !important;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Add !important to override any conflicting styles */
+.hero-header .header-title,
+.hero-header .header-subtitle,
+.hero-header .hero-title,
+.hero-header .hero-subtitle {
+    color: #333333 !important;
+    text-shadow: none !important;
+    -webkit-text-fill-color: #333333 !important;
+    background: none !important;
+}
+
+.hero-header .header-description,
+.hero-header .hero-description {
+    color: #4a4a4a !important;
+    text-shadow: none !important;
 }

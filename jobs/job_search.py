@@ -59,15 +59,18 @@ def render_company_section():
             padding: 1rem 0;
         }
         .company-card {
-            background: #ffffff; /* changed to white */
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
             border-radius: 10px;
             padding: 1rem;
             transition: transform 0.2s;
             cursor: pointer;
+            color: #333333;
         }
         .company-card:hover {
             transform: translateY(-5px);
-            background: #f0f0f0;
+            background: #f8f9fa;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         .company-header {
             display: flex;
@@ -85,11 +88,11 @@ def render_company_section():
             margin-top: 0.5rem;
         }
         .company-category {
-            background: #e0e0e0;
+            background: #f0f0f0;
             padding: 0.2rem 0.5rem;
             border-radius: 15px;
             font-size: 0.8rem;
-            color: #000;
+            color: #333333;
         }
         </style>
     """, unsafe_allow_html=True)

@@ -373,7 +373,7 @@ class ResumeBERTTFModel:
                 # Train the model
                 history = self.ats_model.fit(
                     [X_train_feat, X_train_ids, X_train_masks], y_train,
-                    epochs=20,
+                    epochs=10,
                     batch_size=16,
                     validation_split=0.2,
                     callbacks=callbacks,
@@ -400,7 +400,7 @@ class ResumeBERTTFModel:
                 # Train the model
                 history = self.ats_model.fit(
                     X_train_feat, y_train,
-                    epochs=50,
+                    epochs=10,
                     batch_size=32,
                     validation_split=0.2,
                     callbacks=callbacks,

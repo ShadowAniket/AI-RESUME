@@ -36,6 +36,27 @@ class BERTTFResumeAnalyzer:
             logger.info("Some BERT-TensorFlow models are missing. Training new models...")
             self.train_models()
     
+    def _cleanup_partial_models(self):
+        """Clean up partially trained model files"""
+        model_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models')
+        partial_files = [
+            os.path.join(model_dir, 'bert_tf_ats_score_model'),
+            os.path.join(model_dir, 'bert_tf_format_score_model'),
+            os.path.join(model_dir, 'bert_tf_section_score_model'),
+            os.path.join(model_dir, 'bert_tf_feature_scaler.pkl')
+        ]
+        
+        for file_path in partial_files:
+            if os.path.exists(file_path):
+                try:
+                    if os.path.isdir(file_path):
+                        shutil.rmtree(file_path)
+                    else:
+                        os.remove(file_path)
+                    logger.info(f"Removed partial model file: {file_path}")
+                except Exception as e:
+                    logger.error(f"Failed to remove partial model file {file_path}: {str(e)}")
+
     def train_models(self, dataset_path=None):
         """Train BERT-TensorFlow models for resume scoring"""
         logger.info("Training BERT-TensorFlow models for resume scoring")

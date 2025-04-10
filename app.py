@@ -108,45 +108,582 @@ class ResumeApp:
         """, unsafe_allow_html=True)
 
     def load_lottie_url(self, url: str):
-        """Load Lottie animation from URL"""
-        r = requests.get(url)
-        if r.status_code != 200:
-            return None
-        return r.json()
+        """Load Lottie animation from URL with fallback"""
+        try:
+            r = requests.get(url, timeout=5)  # Add timeout
+            if r.status_code == 200:
+                return r.json()
+        except (requests.RequestException, ValueError):
+            pass
+        
+        # Fallback: return a simple loading animation
+        return {
+            "v": "5.7.4",
+            "fr": 60,
+            "ip": 0,
+            "op": 120,
+            "w": 200,
+            "h": 200,
+            "assets": [],
+            "layers": [{
+                "ddd": 0,
+                "ind": 1,
+                "ty": 4,
+                "nm": "Circle",
+                "sr": 1,
+                "ks": {
+                    "o": {"a": 0, "k": 100},
+                    "r": {
+                        "a": 1,
+                        "k": [{"t": 0, "s": [0]}, {"t": 120, "s": [360]}],
+                        "ix": 10
+                    },
+                    "p": {"a": 0, "k": [100, 100, 0]},
+                    "a": {"a": 0, "k": [0, 0, 0]},
+                    "s": {"a": 0, "k": [100, 100, 100]}
+                },
+                "shapes": [{
+                    "ty": "el",
+                    "p": {"a": 0, "k": [0, 0]},
+                    "s": {"a": 0, "k": [60, 60]},
+                    "c": {"a": 0, "k": [0, 0.6, 1]}
+                }]
+            }]
+        }
 
     def apply_global_styles(self):
+        # We'll use a single consistent set of styles instead of overriding
+        # the styles from style.css
         st.markdown("""
         <style>
-        /* Custom Scrollbar */
+        /* Global Light Theme Styles */
+        body {
+            background-color: var(--bg-darker);
+            color: var(--text-primary);
+        }
+        
+        .stApp {
+            background: var(--bg-darker);
+        }
+        
+        /* Sidebar Styling - From port 8502 */
+        [data-testid="stSidebar"],
+        .css-1d391kg,
+        [data-testid="stSidebarNav"] {
+            background: linear-gradient(180deg, #2c3e50 0%, #3498db 100%) !important;
+            padding: 1rem;
+        }
+        
+        /* Sidebar title styling */
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys p,
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys span,
+        [data-testid="stSidebar"] .st-emotion-cache-ue6h4q,
+        [data-testid="stSidebar"] .st-emotion-cache-pkbazv,
+        [data-testid="stSidebar"] h1,
+        [data-testid="stSidebar"] h2,
+        [data-testid="stSidebar"] h3,
+        [data-testid="stSidebar"] p,
+        .css-1d391kg .st-emotion-cache-ue6h4q,
+        [data-testid="stSidebarNav"] .st-emotion-cache-ue6h4q,
+        .css-1d391kg .st-emotion-cache-eczf16,
+        [data-testid="stSidebarNav"] .st-emotion-cache-eczf16,
+        .css-1d391kg h1,
+        [data-testid="stSidebarNav"] h1,
+        .css-1d391kg p,
+        [data-testid="stSidebarNav"] p,
+        [data-testid="stSidebarNav"] .st-emotion-cache-18ni7ap {
+            color: white !important;
+            font-weight: 500;
+        }
+        
+        /* Sidebar button styling - From port 8502 */
+        [data-testid="stSidebar"] button,
+        [data-testid="stSidebar"] button p,
+        [data-testid="stSidebar"] button span,
+        .css-1d391kg button,
+        div[data-testid="stSidebarNav"] button,
+        .css-1d391kg button p,
+        div[data-testid="stSidebarNav"] button p,
+        .css-1d391kg .st-emotion-cache-16idsys button,
+        .css-1d391kg .st-emotion-cache-16idsys button p,
+        .css-1d391kg .st-emotion-cache-16idsys button span,
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys button,
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys button p,
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys button span {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            border: none !important;
+            padding: 0.75rem 1rem !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            margin: 0.5rem 0 !important;
+            width: 100% !important;
+            text-align: left !important;
+        }
+        
+        [data-testid="stSidebar"] button:hover,
+        [data-testid="stSidebar"] button:active,
+        [data-testid="stSidebar"] button:focus,
+        .css-1d391kg button:hover,
+        div[data-testid="stSidebarNav"] button:hover,
+        .css-1d391kg .st-emotion-cache-16idsys button:hover,
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys button:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            transform: translateX(5px);
+            color: white !important;
+        }
+        
+        /* Card Styling */
+        .stCard {
+            background: var(--bg-dark);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-primary);
+        }
+        
+        .stCard:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Button Styling - From port 8502 */
+        .stButton > button,
+        .st-emotion-cache-1vbkxwb p,
+        .st-emotion-cache-19rxjzo button,
+        .st-emotion-cache-7ym5gk,
+        .st-emotion-cache-1erivf3 {
+            background: var(--primary-gradient) !important;
+            color: white !important;
+            border: none !important;
+            padding: 12px 24px !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 4px rgba(0, 105, 148, 0.2) !important;
+            text-transform: none !important;
+            letter-spacing: 0.5px !important;
+            line-height: 1.4 !important;
+        }
+        
+        .stButton > button:hover {
+            background: linear-gradient(135deg, #005577 0%, #0088B5 100%) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 8px rgba(0, 105, 148, 0.3) !important;
+        }
+        
+        .stButton > button:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 2px 4px rgba(0, 105, 148, 0.2) !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+
+    def apply_input_styles(self):
+        st.markdown("""
+        <style>
+        /* Input Fields */
+        .stTextInput > div > div {
+            background: white;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0;
+        }
+        
+        .stTextInput > div > div:focus-within {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 1px var(--accent-color);
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+    def apply_text_input_styles(self):
+        st.markdown("""
+        <style>
+        /* Streamlit Text Input Base Styles */
+        .stTextInput > div > div {
+            background: white;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0;
+        }
+        
+        .stTextInput > div > div:focus-within {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 1px var(--accent-color);
+        }
+        
+        /* Streamlit Password Input Styles */
+        div[data-baseweb="base-input"] {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        div[data-baseweb="input"] {
+            position: relative !important;
+            background: white !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 8px !important;
+            margin: 8px 0 !important;
+            padding: 0 !important;
+        }
+        
+        div[data-baseweb="input"] input {
+            background: transparent !important;
+            border: none !important;
+            color: var(--text-primary) !important;
+            font-size: 14px !important;
+            padding: 12px !important;
+            height: 45px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            outline: none !important;
+        }
+        
+        /* Remove all focus outlines */
+        div[data-baseweb="input"]:focus,
+        div[data-baseweb="input"] input:focus,
+        div[data-baseweb="input"] div:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Single focus border on container */
+        div[data-baseweb="input"]:focus-within {
+            border-color: var(--accent-color) !important;
+            box-shadow: 0 0 0 1px var(--accent-color) !important;
+        }
+        
+        /* Password Eye Icon */
+        div[data-baseweb="input"] button {
+            position: absolute !important;
+            right: 12px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            background: none !important;
+            border: none !important;
+            padding: 4px !important;
+            color: var(--text-secondary) !important;
+            cursor: pointer !important;
+            z-index: 2 !important;
+            height: auto !important;
+            min-height: auto !important;
+            width: auto !important;
+            min-width: auto !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        /* Eye Icon Hover */
+        div[data-baseweb="input"] button:hover,
+        div[data-baseweb="input"] button:focus {
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            color: var(--accent-color) !important;
+        }
+        
+        /* Remove any inner containers/wrappers styling */
+        div[data-baseweb="input"] > div {
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        /* Admin Login Section */
+        .stExpander {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin: 10px 0;
+            padding: 15px;
+        }
+        
+        .stExpander .stButton > button {
+            width: 100%;
+            margin: 10px 0 5px 0;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            height: 45px;
+        }
+        
+        .stExpander .stButton > button:hover {
+            background: var(--accent-color-dark);
+        }
+        
+        /* File Uploader */
+        .stFileUploader {
+            background: white;
+            border: 2px dashed var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+        
+        .stFileUploader:hover {
+            border-color: var(--accent-color);
+        }
+        
+        /* Metrics - Enhanced for consistency */
+        .stMetric,
+        [data-testid="stMetric"],
+        .st-emotion-cache-10trblm,
+        .st-emotion-cache-1wivap2 {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            color: var(--text-primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .stMetric:hover,
+        [data-testid="stMetric"]:hover,
+        .st-emotion-cache-10trblm:hover,
+        .st-emotion-cache-1wivap2:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0, 105, 148, 0.15);
+        }
+        
+        /* Dashboard specific styling */
+        .dashboard-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+        
+        .metric-card {
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 0.5rem 0;
+        }
+        
+        .metric-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .chart-container {
+            background-color: var(--bg-dark);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        /* Headers */
+        h1, h2, h3 {
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Progress Bars */
+        .stProgress > div > div {
+            background-color: var(--accent-color);
+        }
+        
+        /* Expander */
+        .streamlit-expanderHeader {
+            background: #f5f5f5;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+        }
+        
+        /* Plotly Charts */
+        .js-plotly-plot {
+            background: white !important;
+        }
+        
+        /* Custom Components */
+        .feature-card {
+            background: var(--bg-light);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+        
+        .resume-template {
+            background: var(--bg-light);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 0.5rem;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .resume-template:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.02);
+        }
+        
+        /* Feedback Section */
+        .feedback-card {
+            background: var(--bg-light);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .feedback-card:hover {
+            transform: translateX(5px);
+            border-color: var(--accent-color);
+        }
+        
+        /* About Section */
+        .about-container {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-dark) 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,180,219,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
-
+        
         ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-            border-radius: 4px;
+            background: var(--bg-darker);
         }
-
+        
         ::-webkit-scrollbar-thumb {
-            background: #4CAF50;
+            background: var(--border-color);
             border-radius: 4px;
         }
-
+        
         ::-webkit-scrollbar-thumb:hover {
-            background: #45a049;
+            background: var(--accent-color);
         }
-
-        /* Global Styles */
-        .main-header {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            padding: 2rem;
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        /* Role card styling */
+        .role-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e1e4e8;
+            transition: all 0.3s ease;
+        }
+        
+        .role-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .role-card h3 {
+            color: #2193b0;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Skills tag styling */
+        .skill-tag {
+            display: inline-block;
+            background: rgba(33, 147, 176, 0.1);
+            color: #2193b0;
+            padding: 0.25rem 0.75rem;
             border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            margin: 0.25rem;
+            font-size: 0.875rem;
+        }
+        
+        /* Template preview styling */
+        .template-preview {
+            border: 2px solid #e1e4e8;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .main-header::before {

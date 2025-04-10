@@ -13,17 +13,17 @@ class DashboardManager:
     def __init__(self):
         self.conn = get_database_connection()
         self.colors = {
-            'primary': '#4CAF50',
-            'secondary': '#2196F3',
-            'warning': '#FFA726',
+            'primary': '#2196F3',
+            'secondary': '#1976D2',
+            'warning': '#FFC107',
             'danger': '#F44336',
-            'info': '#00BCD4',
-            'success': '#66BB6A',
+            'info': '#03A9F4',
+            'success': '#4CAF50',
             'purple': '#9C27B0',
-            'background': '#f5f5f5',       # changed to light background
-            'card': '#ffffff',             # changed to white card background
-            'text': '#000000',             # dark text
-            'subtext': '#555555'           # darker subtext
+            'background': '#f5f5f5',
+            'card': '#ffffff',
+            'text': '#212529',
+            'subtext': '#495057'
         }
         
     def apply_dashboard_style(self):
@@ -34,47 +34,49 @@ class DashboardManager:
                     font-size: 2.5rem;
                     font-weight: bold;
                     margin-bottom: 2rem;
-                    color: white;
+                    color: var(--text-primary);
                     text-align: center;
                 }
                 
                 .metric-card {
-                    background-color: #2D2D2D;
+                    background-color: var(--bg-dark);
+                    border: 1px solid var(--border-color);
                     border-radius: 15px;
                     padding: 1.5rem;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
                     transition: transform 0.3s ease;
                     height: 100%;
                 }
                 
                 .metric-card:hover {
                     transform: translateY(-5px);
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
                 }
                 
                 .metric-value {
                     font-size: 2.5rem;
                     font-weight: bold;
-                    color: #4CAF50;
+                    color: var(--accent-color);
                     margin: 0.5rem 0;
                 }
                 
                 .metric-label {
                     font-size: 1rem;
-                    color: #B0B0B0;
+                    color: var(--text-secondary);
                 }
                 
                 .trend-up {
-                    color: #4CAF50;
+                    color: var(--success-color);
                     font-size: 1.2rem;
                 }
                 
                 .trend-down {
-                    color: #F44336;
+                    color: var(--error-color);
                     font-size: 1.2rem;
                 }
                 
                 .chart-container {
-                    background-color: #2D2D2D;
+                    background-color: var(--bg-dark);
                     border-radius: 15px;
                     padding: 1.5rem;
                     margin: 1rem 0;
@@ -82,18 +84,18 @@ class DashboardManager:
                 
                 .section-title {
                     font-size: 1.5rem;
-                    color: white;
+                    color: var(--text-primary);
                     margin: 2rem 0 1rem 0;
                 }
                 
                 .stPlotlyChart {
-                    background-color: #2D2D2D;
+                    background-color: var(--bg-dark);
                     border-radius: 15px;
                     padding: 1rem;
                 }
                 
                 div[data-testid="stHorizontalBlock"] > div {
-                    background-color: #2D2D2D;
+                    background-color: var(--bg-dark);
                     border-radius: 15px;
                     padding: 1rem;
                     margin: 0.5rem;
@@ -105,6 +107,27 @@ class DashboardManager:
 
                 [data-testid="stMetricLabel"] {
                     font-size: 1rem !important;
+                }
+
+                /* Sidebar text color improvements */
+                .stSidebar [data-testid="stMarkdownContainer"] {
+                    color: #ffffff !important;
+                }
+
+                .stSidebar [data-testid="stMarkdownContainer"] h3 {
+                    color: #ffffff !important;
+                }
+
+                .stSidebar [data-testid="stButton"] button {
+                    color: #ffffff !important;
+                }
+
+                .stSidebar [data-testid="stSelectbox"] {
+                    color: #ffffff !important;
+                }
+
+                .stSidebar [data-testid="baseButton-secondary"] {
+                    color: #ffffff !important;
                 }
             </style>
         """, unsafe_allow_html=True)
@@ -612,7 +635,32 @@ class DashboardManager:
             return []
 
     def render_dashboard(self):
-        """Main dashboard rendering function"""
+        """Add container styles to keep hover elements within their context"""
+        st.markdown("""
+            <style>
+            .dashboard-container {
+                background: #ffffff;
+                border-radius: 10px;
+                padding: 2rem;
+                margin: 1rem 0;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                position: relative;  /* For proper hover context */
+                z-index: 1;  /* Ensure proper stacking */
+            }
+            .chart-container {
+                background: #ffffff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                padding: 1rem;
+                margin: 1rem 0;
+                position: relative;  /* For proper hover context */
+            }
+            .plotly-graph-div {
+                position: relative !important;  /* Force relative positioning */
+            }
+            </style>
+        """, unsafe_allow_html=True)
+        
         st.markdown("""
             <style>
                 .dashboard-container {
@@ -790,7 +838,7 @@ class DashboardManager:
                     <h3 style="color: #4FD1C5; margin-bottom: 1rem;">
                         {insight['icon']} {insight['title']}
                     </h3>
-                    <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">
+                    <p style="color: rgba(0, 0, 0, 0.7); margin: 0;">
                         {insight['description']}
                     </p>
                     <div style="margin-top: 1rem;">
@@ -972,55 +1020,46 @@ class DashboardManager:
         }
 
     def create_enhanced_ats_gauge(self, value):
-        """Create an enhanced ATS score gauge chart"""
-        reference = 70  # Target score
-        delta = value - reference
-        
+        """Create an enhanced ATS score gauge chart with improved visibility"""
         fig = go.Figure(go.Indicator(
             mode="gauge+number+delta",
             value=value,
-            delta={
-                'reference': reference,
-                'valueformat': '.1f',
-                'increasing': {'color': '#2ecc71'},
-                'decreasing': {'color': '#e74c3c'}
-            },
-            number={'font': {'size': 40, 'color': 'white'}},
+            number={'font': {'size': 40, 'color': '#333333'}},  # Darker text color
             gauge={
                 'axis': {
                     'range': [0, 100],
                     'tickwidth': 1,
-                    'tickcolor': 'white',
-                    'tickfont': {'color': 'white'}
+                    'tickcolor': '#333333',  # Darker tick color
+                    'tickfont': {'color': '#333333'}  # Darker tick font color
                 },
-                'bar': {'color': '#3498db'},
-                'bgcolor': 'rgba(0,0,0,0)',
+                'bar': {'color': '#2196F3'},
+                'bgcolor': '#ffffff',  # White background
                 'borderwidth': 2,
-                'bordercolor': 'white',
+                'bordercolor': '#333333',  # Darker border
                 'steps': [
-                    {'range': [0, 40], 'color': '#e74c3c'},
-                    {'range': [40, 70], 'color': '#f1c40f'},
-                    {'range': [70, 100], 'color': '#2ecc71'}
-                ],
-                'threshold': {
-                    'line': {'color': 'white', 'width': 4},
-                    'thickness': 0.75,
-                    'value': reference
-                }
+                    {'range': [0, 40], 'color': '#ffcdd2'},  # Light red
+                    {'range': [40, 70], 'color': '#fff9c4'},  # Light yellow
+                    {'range': [70, 100], 'color': '#c8e6c9'}  # Light green
+                ]
             }
         ))
         
         fig.update_layout(
             title={
                 'text': 'ATS Score Performance',
-                'font': {'size': 24, 'color': 'white'},
+                'font': {'size': 24, 'color': '#333333'},  # Darker title color
                 'y': 0.85
             },
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
-            font={'color': 'white'},
+            paper_bgcolor='#ffffff',  # White background
+            plot_bgcolor='#ffffff',  # White background
+            font={'color': '#333333'},  # Darker font color
             height=350,
-            margin=dict(l=20, r=20, t=80, b=20)
+            margin=dict(l=20, r=20, t=80, b=20),
+            hoverlabel=dict(
+                bgcolor='#ffffff',  # White hover background
+                font_size=14,
+                font_color='#333333'  # Darker hover text
+            )
         )
         
         return fig

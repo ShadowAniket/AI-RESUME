@@ -82,28 +82,28 @@ class FeedbackManager:
                 padding: 30px;
                 border-radius: 20px;
                 margin: 20px 0;
-                border: 1px solid #ccc;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                border: 1px solid #e0e0e0;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
             
             .feedback-header {
-                color: #000;
+                color: #ffffff;
                 font-size: 1.5em;
                 font-weight: 600;
                 margin-bottom: 25px;
                 text-align: center;
                 padding: 15px;
-                background: linear-gradient(135deg, #4CAF50, #2196F3);
+                background: linear-gradient(135deg, #2196F3, #1976D2);
                 border-radius: 12px;
-                box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
             
             .feedback-section {
                 margin: 20px 0;
                 padding: 20px;
                 border-radius: 15px;
-                background: #f7f7f7;
-                border: 1px solid #ccc;
+                background: #f5f5f5;
+                border: 1px solid #e0e0e0;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
             
@@ -113,7 +113,7 @@ class FeedbackManager:
             }
             
             .feedback-label {
-                color: #000;
+                color: #212529;
                 font-size: 1.1em;
                 font-weight: 500;
                 margin-bottom: 10px;
@@ -158,8 +158,8 @@ class FeedbackManager:
             }
             
             .textarea-container {
-                background: #f7f7f7;
-                border: 1px solid #ccc;
+                background: #ffffff;
+                border: 1px solid #e0e0e0;
                 border-radius: 8px;
                 padding: 10px;
                 margin-top: 10px;
@@ -170,7 +170,7 @@ class FeedbackManager:
                 min-height: 100px;
                 background: transparent;
                 border: none;
-                color: #000;
+                color: #212529;
                 font-size: 1em;
                 resize: vertical;
             }

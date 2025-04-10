@@ -2,14 +2,15 @@ import streamlit as st
 
 def apply_modern_styles():
     """Apply modern styles by loading the CSS file"""
-    # Styles are now loaded from style.css in app.py
+    # We don't need to add additional styles here as they're loaded from style.css
+    # This prevents style conflicts and ensures consistent styling
     pass
 
 def page_header(title, subtitle=None):
-    """Render a consistent page header with light background and dark text"""
+    """Render a consistent page header with gradient background"""
     st.markdown(
         f'''
-        <div class="page-header" style="background-color: #ffffff; color: #000000; padding: 1rem; border-bottom: 1px solid #d0d0d0;">
+        <div class="page-header">
             <h1 class="header-title">{title}</h1>
             {f'<p class="header-subtitle">{subtitle}</p>' if subtitle else ''}
         </div>
@@ -18,13 +19,15 @@ def page_header(title, subtitle=None):
     )
 
 def hero_section(title, subtitle=None, description=None):
-    """Render a modern hero section with light background and dark text"""
-    # Use description as subtitle if subtitle is not provided
+    """Render a modern hero section with gradient background and animations"""
+    # If description is provided but subtitle is not, use description as subtitle
     if description and not subtitle:
         subtitle = description
+        description = None
+    
     st.markdown(
         f'''
-        <div class="page-header hero-header" style="background-color: #ffffff; color: #000000; padding: 2rem; text-align: center;">
+        <div class="page-header hero-header">
             <h1 class="header-title">{title}</h1>
             {f'<div class="header-subtitle">{subtitle}</div>' if subtitle else ''}
             {f'<p class="header-description">{description}</p>' if description else ''}
@@ -54,17 +57,19 @@ def about_section(content, image_path=None, social_links=None):
     
     # Profile Image
     if image_path:
-        st.image(image_path, use_column_width=True)
-        
+        st.image(image_path, use_column_width=False, width=200)
+    
     # Image Upload
     uploaded_file = st.file_uploader("Upload profile picture", type=['png', 'jpg', 'jpeg'])
     if uploaded_file is not None:
-        st.image(uploaded_file, caption="Uploaded Profile Picture", use_column_width=True)
+        st.image(uploaded_file, use_column_width=False, width=200)
     
     # Social Links
     if social_links:
-        links_html = " ".join([f'<a href="{link}">{link}</a>' for link in social_links])
-        st.markdown(links_html, unsafe_allow_html=True)
+        st.markdown('<div class="social-links">', unsafe_allow_html=True)
+        for platform, url in social_links.items():
+            st.markdown(f'<a href="{url}" target="_blank" class="social-link"><i class="fab fa-{platform.lower()}"></i></a>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
     
     # About Content
     st.markdown(f"""
@@ -103,22 +108,27 @@ def template_card(title, description, image_url=None):
     """, unsafe_allow_html=True)
 
 def feedback_card(name, feedback, rating):
-    """Render a modern feedback card with rating stars and color grading based on rating value."""
-    rating_val = float(rating)
-    if rating_val >= 4.0:
-        color = "#4CAF50"  # green for high ratings
-    elif rating_val >= 3.0:
-        color = "#FFA500"  # orange for mid ratings
-    else:
-        color = "#FF4444"  # red for low ratings
-    stars = "⭐" * int(rating_val)
-    st.markdown(f"<div class='feedback-card'><strong>{name}</strong>: {feedback} <span style='color: {color}; font-weight: bold;'>{stars} ({rating_val})</span></div>", unsafe_allow_html=True)
+    """Render a modern feedback card with rating stars"""
+    stars = "⭐" * int(rating)
+    
+    st.markdown(f"""
+        <div class="card feedback-card">
+            <div class="feedback-header">
+                <div class="feedback-name">{name}</div>
+                <div class="feedback-rating">{stars}</div>
+            </div>
+            <p class="feedback-text">{feedback}</p>
+        </div>
+    """, unsafe_allow_html=True)
 
 def loading_spinner(message="Loading..."):
-    """Render a loading spinner with message"""
-    import time
-    with st.spinner(message):
-        time.sleep(1)
+    """Show a modern loading spinner with message"""
+    st.markdown(f"""
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p class="loading-message">{message}</p>
+        </div>
+    """, unsafe_allow_html=True)
 
 def progress_bar(value, max_value, label=None):
     """Render a modern animated progress bar"""
@@ -314,8 +324,27 @@ def render_feedback(feedback_data):
     
     st.markdown(feedback_html, unsafe_allow_html=True)
 
+def render_feedback_form():
+    st.markdown("""
+        <div class="feedback-header">
+            <h1>Your Voice Matters! 🗣️</h1>
+            <p>Help us improve Smart Resume AI with your valuable feedback and suggestions.</p>
+        </div>
+        <div class="feedback-form-container">
+    """, unsafe_allow_html=True)
+
+    # Form content will be added here by the feedback manager
+    st.markdown("</div>", unsafe_allow_html=True)
+
+def render_feedback_overview():
+    st.markdown("""
+        <div class="feedback-section">
+            <h2 class="feedback-overview-title">Feedback Overview 📊</h2>
+        </div>
+    """, unsafe_allow_html=True)
+
 def render_analytics_section(resume_uploaded=False, metrics=None):
-    """Render the analytics section of the dashboard with improved contrast."""
+    """Render the analytics section of the dashboard"""
     if not metrics:
         metrics = {
             'views': 0,
@@ -323,57 +352,38 @@ def render_analytics_section(resume_uploaded=False, metrics=None):
             'score': 'N/A'
         }
     
-    # Total Resumes Card
-    st.markdown(f"""
-        <div style='background: #ffffff; border: 1px solid #ccc; border-radius: 10px;
-                    padding: 20px; text-align: center; margin-bottom: 20px;'>
-            <div style='color: #0077b5; font-size: 2rem; margin-bottom: 10px;'>
+    # Views Card
+    st.markdown("""
+        <div style='background: rgba(0, 20, 30, 0.3); border-radius: 15px; padding: 2rem; text-align: center; margin-bottom: 1rem;'>
+            <div style='color: #00bfa5; font-size: 2.5rem; margin-bottom: 1rem;'>
                 <i class='fas fa-eye'></i>
             </div>
-            <h2 style='color: #333333; font-size: 1.5rem; margin-bottom: 10px;'>Total Resumes</h2>
-            <p style='color: #333333; font-size: 2rem; font-weight: bold; margin: 0;'>{metrics['views']}</p>
-            <p style='color: #28a745; font-size: 1rem; margin: 0;'>↑ 3.2%</p>
+            <h2 style='color: white; font-size: 1.5rem; margin-bottom: 1rem;'>Resume Views</h2>
+            <p style='color: #00bfa5; font-size: 2.5rem; font-weight: bold; margin: 0;'>{}</p>
         </div>
-    """, unsafe_allow_html=True)
+    """.format(metrics['views']), unsafe_allow_html=True)
     
-    # Average ATS Score Card
-    st.markdown(f"""
-        <div style='background: #ffffff; border: 1px solid #ccc; border-radius: 10px;
-                    padding: 20px; text-align: center; margin-bottom: 20px;'>
-            <div style='color: #0077b5; font-size: 2rem; margin-bottom: 10px;'>
+    # Downloads Card
+    st.markdown("""
+        <div style='background: rgba(0, 20, 30, 0.3); border-radius: 15px; padding: 2rem; text-align: center; margin-bottom: 1rem;'>
+            <div style='color: #00bfa5; font-size: 2.5rem; margin-bottom: 1rem;'>
+                <i class='fas fa-download'></i>
+            </div>
+            <h2 style='color: white; font-size: 1.5rem; margin-bottom: 1rem;'>Downloads</h2>
+            <p style='color: #00bfa5; font-size: 2.5rem; font-weight: bold; margin: 0;'>{}</p>
+        </div>
+    """.format(metrics['downloads']), unsafe_allow_html=True)
+    
+    # Profile Score Card
+    st.markdown("""
+        <div style='background: rgba(0, 20, 30, 0.3); border-radius: 15px; padding: 2rem; text-align: center; margin-bottom: 1rem;'>
+            <div style='color: #00bfa5; font-size: 2.5rem; margin-bottom: 1rem;'>
                 <i class='fas fa-chart-line'></i>
             </div>
-            <h2 style='color: #333333; font-size: 1.5rem; margin-bottom: 10px;'>Avg ATS Score</h2>
-            <p style='color: #333333; font-size: 2rem; font-weight: bold; margin: 0;'>{metrics['score']}</p>
-            <p style='color: #28a745; font-size: 1rem; margin: 0;'>↑ 0.3%</p>
+            <h2 style='color: white; font-size: 1.5rem; margin-bottom: 1rem;'>Profile Score</h2>
+            <p style='color: #00bfa5; font-size: 2.5rem; font-weight: bold; margin: 0;'>{}</p>
         </div>
-    """, unsafe_allow_html=True)
-    
-    # High Performing Card
-    st.markdown(f"""
-        <div style='background: #ffffff; border: 1px solid #ccc; border-radius: 10px;
-                    padding: 20px; text-align: center; margin-bottom: 20px;'>
-            <div style='color: #0077b5; font-size: 2rem; margin-bottom: 10px;'>
-                <i class='fas fa-trophy'></i>
-            </div>
-            <h2 style='color: #333333; font-size: 1.5rem; margin-bottom: 10px;'>High Performing</h2>
-            <p style='color: #333333; font-size: 2rem; font-weight: bold; margin: 0;'>91</p>
-            <p style='color: #ff4444; font-size: 1rem; margin: 0;'>→ 0%</p>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    # Success Rate Card
-    st.markdown(f"""
-        <div style='background: #ffffff; border: 1px solid #ccc; border-radius: 10px;
-                    padding: 20px; text-align: center; margin-bottom: 20px;'>
-            <div style='color: #0077b5; font-size: 2rem; margin-bottom: 10px;'>
-                <i class='fas fa-check-circle'></i>
-            </div>
-            <h2 style='color: #333333; font-size: 1.5rem; margin-bottom: 10px;'>Success Rate</h2>
-            <p style='color: #333333; font-size: 2rem; font-weight: bold; margin: 0;'>25.3%</p>
-            <p style='color: #ff4444; font-size: 1rem; margin: 0;'>→ 0%</p>
-        </div>
-    """, unsafe_allow_html=True)
+    """.format(metrics['score']), unsafe_allow_html=True)
 
 def render_activity_section(resume_uploaded=False):
     """Render the recent activity section"""
