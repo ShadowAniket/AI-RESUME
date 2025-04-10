@@ -42,6 +42,10 @@ __pycache__/
 .env.local
 .env.*.local
 
+# Admin credential files
+change_admin_credentials.py
+init_default_admin.py
+
 # Log files
 *.log
 

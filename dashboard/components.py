@@ -59,7 +59,12 @@ class DashboardComponents:
             margin=dict(l=20, r=20, t=50, b=20)
         )
         
-        return fig
+        # Wrap the chart in a div with chart-container class
+        # st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+        # chart = st.plotly_chart(fig, use_container_width=True)
+        # st.markdown('</div>', unsafe_allow_html=True)
+        
+        # return chart
 
     def create_trend_chart(self, dates, values, title):
         """Create a trend line chart"""
@@ -91,7 +96,12 @@ class DashboardComponents:
             )
         )
         
-        return fig
+        # Wrap the chart in a div with chart-container class
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+        chart = st.plotly_chart(fig, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        return chart
 
     def create_bar_chart(self, categories, values, title):
         """Create a bar chart"""
@@ -124,7 +134,12 @@ class DashboardComponents:
             )
         )
         
-        return fig
+        # Wrap the chart in a div with chart-container class
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+        chart = st.plotly_chart(fig, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        return chart
 
     def create_dual_axis_chart(self, categories, values1, values2, title):
         """Create a chart with dual y-axes"""
@@ -172,4 +187,9 @@ class DashboardComponents:
         fig.update_yaxes(title_text="Count", color=self.colors['text'], secondary_y=False)
         fig.update_yaxes(title_text="Score", color=self.colors['text'], secondary_y=True)
         
-        return fig
+        # Wrap the chart in a div with chart-container class
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+        chart = st.plotly_chart(fig, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        return chart

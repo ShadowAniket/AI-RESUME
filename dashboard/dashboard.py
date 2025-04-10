@@ -130,6 +130,33 @@ class DashboardManager:
                     color: #ffffff !important;
                 }
             </style>
+            <script>
+                // Function to wrap SVG containers in chart-container divs
+                function wrapSvgContainers() {
+                    // Find all SVG containers
+                    const svgContainers = document.querySelectorAll('div.user-select-none.svg-container');
+                    
+                    // Loop through each SVG container
+                    svgContainers.forEach(container => {
+                        // Check if it's not already wrapped
+                        if (!container.parentElement.classList.contains('chart-container')) {
+                            // Create a new div with chart-container class
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'chart-container';
+                            
+                            // Replace the container with the wrapper
+                            container.parentNode.insertBefore(wrapper, container);
+                            wrapper.appendChild(container);
+                        }
+                    });
+                }
+                
+                // Run the function when the DOM is fully loaded
+                document.addEventListener('DOMContentLoaded', wrapSvgContainers);
+                
+                // Also run periodically to catch dynamically added charts
+                setInterval(wrapSvgContainers, 1000);
+            </script>
         """, unsafe_allow_html=True)
 
     def get_resume_metrics(self):
