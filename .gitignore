@@ -58,3 +58,6 @@ build/
 .ipynb_checkpoints
 *.ipynb
 resume_analytics/models/bert_tf_ats_score_model/variables/variables.data-00000-of-00001
+
+# Resume uploads
+resumes/

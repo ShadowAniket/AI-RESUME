@@ -551,7 +551,7 @@ div.user-select-none.svg-container:hover {
     transform: scale(1.02);
 }
 
-/* Feedback Section */
+/* Feedback Section - Improved hover effects */
 .feedback-card {
     background: var(--bg-light);
     border-radius: 15px;
@@ -560,11 +560,13 @@ div.user-select-none.svg-container:hover {
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
     color: var(--text-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .feedback-card:hover {
-    transform: translateX(5px);
+    transform: translateY(-2px);
     border-color: var(--accent-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Code editor and text areas */
@@ -588,17 +590,28 @@ div[data-baseweb="slider"] {
     margin: 2rem 0;
     position: relative;
     z-index: 10;
+    touch-action: none !important;
+    user-select: none !important;
 }
 
 div[data-baseweb="slider"] div[role="slider"] {
     background: #006994 !important;
     border: 2px solid #006994 !important;
     cursor: pointer !important;
+    touch-action: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    position: relative !important;
+    z-index: 30 !important;
 }
 
 /* Track styles */
 div[data-baseweb="slider"] [data-testid="stSliderBase"] {
     background: #f0f0f0 !important;
+    pointer-events: auto !important;
+    touch-action: none !important;
 }
 
 /* Slider track before the thumb */
@@ -613,7 +626,7 @@ div[class*="Track"]::before {
 
 /* Feedback text color and contrast improvements */
 .feedback-header h1 {
-    color: #333333 !important;
+    color: var(--text-primary) !important;
     font-size: 2.5rem;
     margin-bottom: 1rem;
     text-shadow: none;
@@ -626,52 +639,109 @@ div[class*="Track"]::before {
     margin-bottom: 1.5rem;
 }
 
-/* Slider Numbers/Labels */
-div[data-baseweb="slider"] .st-emotion-cache-1vbkxwb,
-div[data-baseweb="slider"] .st-emotion-cache-1xw8zd0,
-div[data-baseweb="slider"] .st-emotion-cache-10y5sf6,
+/* Slider Numbers/Labels - Updated emotion cache selectors */
+div[data-baseweb="slider"] [class*="st-emotion-cache"],
 div[data-testid="stTickBarMin"],
 div[data-testid="stTickBarMax"] {
     color: var(--text-primary) !important;
     background: transparent !important;
     font-weight: 500 !important;
+    font-size: 14px !important;
 }
 
-/* Feedback Overview Text */
-.st-emotion-cache-10trblm {
-    color: #212529 !important;
-    font-weight: 600 !important;
-    font-size: 1.8rem !important;
-}
-
-/* Your Voice Matters Text */
-.feedback-header h1 {
+/* Feedback Overview Text - Updated emotion cache selector */
+[class*="st-emotion-cache"] h1,
+[class*="st-emotion-cache"] h2,
+[class*="st-emotion-cache"] h3 {
     color: var(--text-primary) !important;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    text-shadow: none;
+    font-weight: 600 !important;
 }
 
-/* Slider Bar Min and Max Numbers */
-.st-emotion-cache-1inwz65 {
-    color: #f8f9fa !important;
+/* Slider Bar Min and Max Numbers - Updated selector */
+[data-testid="stTickBarMin"], [data-testid="stTickBarMax"] {
+    color: var(--text-primary) !important;
     background: transparent !important;
     font-weight: 500 !important;
+    font-size: 14px !important;
 }
 
+/* Slider thumb hover effect */
+div[data-baseweb="slider"] div[role="slider"]:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+div[data-baseweb="slider"] div[role="slider"]:active {
+    cursor: grabbing !important;
+    transform: scale(1.15) !important;
+}
+
+/* Slider thumb value display */
+.StyledThumbValue,
+div[class*="StyledThumbValue"],
+.st-emotion-cache-10y5sf6,
+.st-emotion-cache-1vzeuhh .StyledThumbValue,
+.st-emotion-cache-1vzeuhh div[data-testid="stThumbValue"],
+div[data-testid="stThumbValue"] {
+    background: var(--accent-color) !important;
+    color: white !important;
+    border-radius: 4px !important;
+    padding: 2px 6px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    position: absolute !important;
+    top: -30px !important;
+    right: 0 !important;
+    min-width: 24px !important;
+    text-align: center !important;
+    z-index: 40 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    transform: translateX(-50%) !important;
+    left: 50% !important;
+}
+
+/* Fix for specific slider thumb value positioning */
+.st-emotion-cache-1vzeuhh {
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.st-emotion-cache-1vzeuhh .StyledThumbValue,
+.st-emotion-cache-1vzeuhh div[data-testid="stThumbValue"] {
+    transform: translateX(-50%) !important;
+    left: 50% !important;
+    right: auto !important;
+    pointer-events: none !important;
+}
+
+/* Slider Components - Updated with more generic selectors */
 /* Slider Track */
-.st-emotion-cache-1vbkxwb {
+div[data-baseweb="slider"] [data-testid="stSliderBase"] {
     background: linear-gradient(135deg, #006994 0%, #0099CC 100%) !important;
 }
 
 /* Slider Thumb */
-.st-emotion-cache-1xw8zd0 {
+div[data-baseweb="slider"] div[role="slider"] {
     background: #006994 !important;
     border: 2px solid #006994 !important;
+    cursor: grab !important;
+    touch-action: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    position: relative !important;
+    z-index: 30 !important;
+    will-change: transform !important;
 }
 
 /* Slider Active Track */
-.st-emotion-cache-10y5sf6 {
+div[data-baseweb="slider"] [class*="Track"] {
     background: linear-gradient(135deg, #006994 0%, #0099CC 100%) !important;
 }
 
@@ -884,11 +954,12 @@ h1 {
 
 /* Feedback Section Styling */
 .feedback-section {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
     border-radius: 20px;
     padding: 2.5rem;
     margin: 2rem 0;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
 }
 
 /* Feedback Header */
@@ -930,17 +1001,26 @@ h1 {
 /* Rating Slider */
 div[data-baseweb="slider"] {
     margin: 2.5rem 0;
+    padding: 10px 0;
 }
 
 /* Slider track */
 div[data-baseweb="slider"] [data-testid="stSliderBase"] {
     background: #f0f0f0 !important;
-    height: 6px !important;
-    border-radius: 3px !important;
+    height: 8px !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Slider thumb */
 div[data-baseweb="slider"] div[role="slider"] {
+    width: 20px !important;
+    height: 20px !important;
+    background: #006994 !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
     background: #006994 !important;
     border: 3px solid #ffffff !important;
     box-shadow: 0 2px 8px rgba(0, 105, 148, 0.3) !important;
@@ -2077,11 +2157,11 @@ div[data-testid="stTickBarMax"] {
 
 /* Custom Scrollbar for Feedback Content Section */
 .feedback-content::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 .feedback-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: #f0f0f0;
     border-radius: 4px;
     margin: 4px 0;
 }
@@ -2089,46 +2169,11 @@ div[data-testid="stTickBarMax"] {
 .feedback-content::-webkit-scrollbar-thumb {
     background: linear-gradient(135deg, #006994, #0099CC);
     border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .feedback-content::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #005577, #0088B5);
-}
-
-/* Custom Scrollbar for Feedback Content Section */
-.feedback-content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.feedback-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-    margin: 4px 0;
-}
-
-.feedback-content::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #006994, #0099CC);
-    border-radius: 4px;
-}
-
-.feedback-content::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #005577, #0088B5);
-}
-
-/* Custom Scrollbar for Feedback Content Section */
-.feedback-content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.feedback-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-    margin: 4px 0;
-}
-
-.feedback-content::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #006994, #0099CC);
-    border-radius: 4px;
 }
 
 .feedback-content::-webkit-scrollbar-thumb:hover {
